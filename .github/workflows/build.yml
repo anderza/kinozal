@@ -4,18 +4,32 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
       - uses: gradle/actions/setup-gradle@v4
       - run: ./gradlew assembleRelease
+      - run: cp app/build/outputs/apk/release/app-release.apk kinozal.apk
       - uses: actions/upload-artifact@v4
         with:
           name: kinozal-apk
-          path: app/build/outputs/apk/release/*.apk
+          path: kinozal.apk
+      # Каждая сборка из main публикуется как релиз: APK можно скачать прямо с телефона.
+      - name: Publish release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "build-${{ github.run_number }}" kinozal.apk \
+            --title "Кинозал, сборка ${{ github.run_number }}" \
+            --notes "Сборка из коммита ${{ github.sha }}" \
+            --latest
