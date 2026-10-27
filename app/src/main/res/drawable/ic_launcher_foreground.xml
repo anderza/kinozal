@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Плёночная рамка с кнопкой воспроизведения -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M34,38h40a4,4 0 0 1 4,4v24a4,4 0 0 1 -4,4h-40a4,4 0 0 1 -4,-4v-24a4,4 0 0 1 4,-4z" />
+    <path
+        android:fillColor="#FFE5484D"
+        android:pathData="M48,45l14,9l-14,9z" />
+</vector>

@@ -1,0 +1,3 @@
+-keepattributes *Annotation*, InnerClasses
+-keep,includedescriptorclasses class com.kinozal.app.**$$serializer { *; }
+-keepclassmembers class com.kinozal.app.** { *** Companion; }
